@@ -1,0 +1,16 @@
+[
+{
+  "modid": "BetterHUD",
+  "name": "Better HUD",
+  "description": "A better HUD for Minecraft.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["ExampleDude"],
+  "credits": "Made by Nulla MC Development Group.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
