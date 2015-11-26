@@ -12,109 +12,29 @@
  */
 package com.KanbeKotori.BetterHUD;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.*;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Blocks;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-import net.minecraftforge.common.ForgeHooks;
+import com.KanbeKotori.BetterHUD.Events.*;
+
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 @Mod(modid = BetterHUD.MODID, version = BetterHUD.VERSION)
 public class BetterHUD {
     public static final String MODID = "BetterHUD";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "2.0";
     
     @EventHandler
     public void init(FMLInitializationEvent event) {
-    	MinecraftForge.EVENT_BUS.register(this);
+    	FMLCommonHandler.instance().bus().register(new KeyListener());
+		ClientRegistry.registerKeyBinding(KeyListener.openGUI);
+    	
+    	MinecraftForge.EVENT_BUS.register(new ReDraw_HUD_Air());
+    	MinecraftForge.EVENT_BUS.register(new ReDraw_HUD_Armor());
+    	MinecraftForge.EVENT_BUS.register(new ReDraw_HUD_Food());
+    	MinecraftForge.EVENT_BUS.register(new ReDraw_HUD_Health());
     }
     
-    @SubscribeEvent
-	public void ReDrawHUD(RenderGameOverlayEvent.Pre event) {
-		if(event.type == ElementType.HEALTH) {
-	    	event.setCanceled(true);
-	    	Minecraft mc = Minecraft.getMinecraft();
-	        int width = event.resolution.getScaledWidth();
-	        int height = event.resolution.getScaledHeight();
-	        int health = (int) Minecraft.getMinecraft().thePlayer.getHealth();
-	        int maxhealth = (int) Minecraft.getMinecraft().thePlayer.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
-	        
-	        int length = 90 * health / maxhealth;
-	        Gui.drawRect(width / 2 - 91, height - 39, width / 2 - 1, height - 30, 0x7F000000);
-	        Gui.drawRect(width / 2 - 91, height - 39, width / 2 - 91 + length, height - 30, 0x7F00FF00);
-	        
-	        String hp = "Health: " + health + " / " + maxhealth;
-	        FontRenderer fontRenderer = mc.fontRenderer;
-	        int color = 0xFFFFFF;
-	        if (health != maxhealth) {color = 0xFF0000;}
-	        fontRenderer.drawStringWithShadow(hp, width / 2 - 91, height - 39, color);
-	        fontRenderer.drawString("", 0, 0, 0xFFFFFF);	//³õÊ¼»¯×²îÑ¼¦       
-	        mc.renderEngine.bindTexture(Gui.icons);
-	    } else if(event.type == ElementType.ARMOR) {
-	    	event.setCanceled(true);
-	    	Minecraft mc = Minecraft.getMinecraft();
-	    	int width = event.resolution.getScaledWidth();
-	    	int height = event.resolution.getScaledHeight() - 10;
-	    	int armor = ForgeHooks.getTotalArmorValue(Minecraft.getMinecraft().thePlayer);
-	    	int maxarmor = 20;
-    
-	    	if (armor != 0) {   
-	    		int length = 90 * armor / maxarmor;
-	    		Gui.drawRect(width / 2 - 91, height - 39, width / 2 - 1, height - 30, 0x7F000000);
-	    		Gui.drawRect(width / 2 - 91, height - 39, width / 2 - 91 + length, height - 30, 0x7FAFAFAF);
-
-	    		String ap = "Armor: " + armor + " / " + maxarmor;
-	    		FontRenderer fontRenderer = mc.fontRenderer;
-	    		fontRenderer.drawStringWithShadow(ap, width / 2 - 91, height - 39, 0xFFFFFF);
-	    		fontRenderer.drawString("", 0, 0, 0xFFFFFF);	//³õÊ¼»¯×²îÑ¼¦       
-	    	}
-	    	
-	    	mc.renderEngine.bindTexture(Gui.icons);
-	    } else if(event.type == ElementType.FOOD) {
-	    	event.setCanceled(true);
-	    	Minecraft mc = Minecraft.getMinecraft();
-	    	int width = event.resolution.getScaledWidth();
-	    	int height = event.resolution.getScaledHeight();
-	    	int hunger = Minecraft.getMinecraft().thePlayer.getFoodStats().getFoodLevel();
-	    	int maxhunger = 20;
-     
-	    	int length = 90 * hunger / maxhunger;
-	    	Gui.drawRect(width / 2, height - 39, width / 2 + 90, height - 30, 0x7F000000);
-	    	Gui.drawRect(width / 2, height - 39, width / 2 + length, height - 30, 0x7FFF0000);
-
-	    	String hup = "Hunger: " + hunger + " / " + maxhunger;
-	    	FontRenderer fontRenderer = mc.fontRenderer;
-	    	fontRenderer.drawStringWithShadow(hup, width / 2, height - 39, 0xFFFFFF);
-	    	fontRenderer.drawString("", 0, 0, 0xFFFFFF);	//³õÊ¼»¯×²îÑ¼¦    
-	    	
-	    	mc.renderEngine.bindTexture(Gui.icons);
-	    } else if(event.type == ElementType.AIR) {
-	    	event.setCanceled(true);
-	    	Minecraft mc = Minecraft.getMinecraft();
-	    	int width = event.resolution.getScaledWidth();
-	    	int height = event.resolution.getScaledHeight() - 10;
-	    	int air = Minecraft.getMinecraft().thePlayer.getAir();
-	    	int maxair = 300;
-     
-	    	if (air < 300) {
-	    		int length = 90 * air / maxair;
-	    		Gui.drawRect(width / 2, height - 39, width / 2 + 90, height - 30, 0x7F000000);
-	    		Gui.drawRect(width / 2, height - 39, width / 2 + length, height - 30, 0x7F0000FF);
-
-	    		String hup = "Air: " + air + " / " + maxair;
-	    		FontRenderer fontRenderer = mc.fontRenderer;
-	    		fontRenderer.drawStringWithShadow(hup, width / 2, height - 39, 0xFFFFFF);
-	    		fontRenderer.drawString("", 0, 0, 0xFFFFFF);	//³õÊ¼»¯×²îÑ¼¦    
-	    	}
-	    	
-	    	mc.renderEngine.bindTexture(Gui.icons);
-	    }
-		
-	}
 }
