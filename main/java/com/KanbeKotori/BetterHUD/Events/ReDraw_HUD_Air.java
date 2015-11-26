@@ -28,13 +28,13 @@ public class ReDraw_HUD_Air {
 	    	event.setCanceled(true);
 	    	Minecraft mc = Minecraft.getMinecraft();
 	    	int width = event.resolution.getScaledWidth();
-	    	int height = event.resolution.getScaledHeight() - 10;
+	    	int height = event.resolution.getScaledHeight();
 	    	int air = Minecraft.getMinecraft().thePlayer.getAir();
 	    	int maxair = 300;
      
 	    	if (air < 300) {
 	    		int goalwidth = width / 2;
-		        int goalheight = height - 39;
+		        int goalheight = height - 49;
 		        
 		        if (Helper.getHUDPositionX(Helper.getPlayer(), "Air") != 0) {
 		        	goalwidth = (int) (width * Helper.getHUDPositionX(Helper.getPlayer(), "Air")) - 45;

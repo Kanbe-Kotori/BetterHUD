@@ -29,13 +29,13 @@ public class ReDraw_HUD_Armor {
 	    	event.setCanceled(true);
 	    	Minecraft mc = Minecraft.getMinecraft();
 	    	int width = event.resolution.getScaledWidth();
-	    	int height = event.resolution.getScaledHeight() - 10;
+	    	int height = event.resolution.getScaledHeight();
 	    	int armor = ForgeHooks.getTotalArmorValue(Minecraft.getMinecraft().thePlayer);
 	    	int maxarmor = 20;
     
 	    	if (armor != 0) {  
 	    		int goalwidth = width / 2 - 91;
-		        int goalheight = height - 39;
+		        int goalheight = height - 49;
 		        
 		        if (Helper.getHUDPositionX(Helper.getPlayer(), "Armor") != 0) {
 		        	goalwidth = (int) (width * Helper.getHUDPositionX(Helper.getPlayer(), "Armor")) - 45;
