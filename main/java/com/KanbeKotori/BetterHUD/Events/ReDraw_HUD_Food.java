@@ -49,7 +49,11 @@ public class ReDraw_HUD_Food {
 
 	    	String hup = "Hunger: " + hunger + " / " + maxhunger;
 	    	FontRenderer fontRenderer = mc.fontRenderer;
-	    	fontRenderer.drawStringWithShadow(hup, goalwidth, goalheight, 0xFFFFFF);
+	    	int color = 0xFFFFFF;
+	        if (hunger <= maxhunger * 0.25) {color = 0xFF0000;}
+	        else if (hunger <= maxhunger * 0.5) {color = 0xFFFF00;}
+	        else if (hunger > maxhunger) {color = 0x00FF00;}
+	    	fontRenderer.drawStringWithShadow(hup, goalwidth, goalheight, color);
 	    	fontRenderer.drawString("", 0, 0, 0xFFFFFF);	//³õÊ¼»¯×²îÑ¼¦    
 	    	
 	    	mc.renderEngine.bindTexture(Gui.icons);
