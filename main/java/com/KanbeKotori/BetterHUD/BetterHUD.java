@@ -35,6 +35,7 @@ public class BetterHUD {
     	MinecraftForge.EVENT_BUS.register(new ReDraw_HUD_Armor());
     	MinecraftForge.EVENT_BUS.register(new ReDraw_HUD_Food());
     	MinecraftForge.EVENT_BUS.register(new ReDraw_HUD_Health());
+
     }
     
 }

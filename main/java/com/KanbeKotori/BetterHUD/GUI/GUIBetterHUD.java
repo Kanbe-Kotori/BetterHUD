@@ -116,7 +116,16 @@ public class GUIBetterHUD extends GuiScreen {
     	HealthPosInputX.setFocused(false);
     	HealthPosInputX.setCanLoseFocus(true);
     	HealthPosInputY.setFocused(false);
-    	HealthPosInputY.setCanLoseFocus(true);    	
+    	HealthPosInputY.setCanLoseFocus(true);    
+    	
+    	AirPosInputX.setText(Helper.getHUDPositionX(Helper.getPlayer(), "Air") + "");
+    	AirPosInputY.setText(Helper.getHUDPositionY(Helper.getPlayer(), "Air") + "");
+    	ArmorPosInputX.setText(Helper.getHUDPositionX(Helper.getPlayer(), "Armor") + "");
+    	ArmorPosInputY.setText(Helper.getHUDPositionY(Helper.getPlayer(), "Armor") + "");
+    	FoodPosInputX.setText(Helper.getHUDPositionX(Helper.getPlayer(), "Food") + "");
+    	FoodPosInputY.setText(Helper.getHUDPositionY(Helper.getPlayer(), "Food") + "");
+    	HealthPosInputX.setText(Helper.getHUDPositionX(Helper.getPlayer(), "Health") + "");
+    	HealthPosInputY.setText(Helper.getHUDPositionY(Helper.getPlayer(), "Health") + "");
     	
     }
  
@@ -139,7 +148,7 @@ public class GUIBetterHUD extends GuiScreen {
     	FoodPosInputY.drawTextBox();
     	HealthPosInputX.drawTextBox();
     	HealthPosInputY.drawTextBox();
-        
+
 	}
     
     @Override

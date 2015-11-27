@@ -29,10 +29,12 @@ public class Helper {
 		return player.getEntityData().getBoolean(HUD + "isUnDraw");
 	}
 
+	@Deprecated //还没写。。
 	public static void setVerticle(EntityPlayer player, boolean flag, String HUD) {
 		player.getEntityData().setBoolean(HUD + "isVerticle", flag);
 	}
 	
+	@Deprecated //还没写。。
 	public static boolean isVerticle(EntityPlayer player, String HUD) {
 		return player.getEntityData().getBoolean(HUD + "isVerticle");
 	}
