@@ -39,6 +39,7 @@ public class GUIBetterHUD extends GuiScreen {
     
     private GuiButton btnYes;
 	private GuiButton btnExit;
+	private GuiButton btnReset;
     
     @Override
     protected void keyTyped(char par1, int par2) {
@@ -89,9 +90,11 @@ public class GUIBetterHUD extends GuiScreen {
     	
     	//Keyboard.enableRepeatEvents(true); //打开键盘连续输入
     	
-    	buttonList.add(btnYes = new GuiButton(0, (int) (width * 0.3) - 40, (int) (height*0.9) - 10, 80, 20, "Yes"));
-    	buttonList.add(btnExit = new GuiButton(2, (int) (width * 0.6) - 40, (int) (height*0.9) - 10, 80, 20, "Exit"));
+    	buttonList.add(btnYes = new GuiButton(0, (int) (width * 0.25) - 40, (int) (height*0.9) - 10, 80, 20, "Yes"));
+    	buttonList.add(btnReset = new GuiButton(1, (int) (width * 0.5) - 40, (int) (height*0.9) - 10, 80, 20, "Reset"));
+    	buttonList.add(btnExit = new GuiButton(2, (int) (width * 0.75) - 40, (int) (height*0.9) - 10, 80, 20, "Exit"));
 
+    	
     	AirPosInputX 	= new GuiTextField(fontRendererObj, (int) (width * 0.4) - 25, (int) (height * 0.3) - 10, 50, 20);
     	AirPosInputY 	= new GuiTextField(fontRendererObj, (int) (width * 0.6) - 25, (int) (height * 0.3) - 10, 50, 20);
     	ArmorPosInputX 	= new GuiTextField(fontRendererObj, (int) (width * 0.4) - 25, (int) (height * 0.45) - 10, 50, 20);
@@ -155,6 +158,12 @@ public class GUIBetterHUD extends GuiScreen {
 	protected void actionPerformed(GuiButton button) {
 		if (button == btnExit) {
 	        mc.displayGuiScreen(parentScreen);
+	    } else if (button == btnReset) {
+	    	Helper.setHUDPosition(Helper.getPlayer(), 0, 0, "Air");
+	    	Helper.setHUDPosition(Helper.getPlayer(), 0, 0, "Armor");
+	    	Helper.setHUDPosition(Helper.getPlayer(), 0, 0, "Food");
+	    	Helper.setHUDPosition(Helper.getPlayer(), 0, 0, "Health");
+	    	refresh();
 	    } else if (button == btnYes) {
 	    	float AirX = Helper.to0_1(Helper.toFloat(AirPosInputX.getText()));
 	    	float AirY = Helper.to0_1(Helper.toFloat(AirPosInputY.getText()));
@@ -172,6 +181,11 @@ public class GUIBetterHUD extends GuiScreen {
 	    	
 	        //mc.displayGuiScreen(parentScreen);
     	}
-	}       
+	}   
+    
+    private void refresh() {
+        mc.displayGuiScreen(parentScreen);
+        mc.displayGuiScreen(new GUIBetterHUD(this.parentScreen));
+    }
 
 }
