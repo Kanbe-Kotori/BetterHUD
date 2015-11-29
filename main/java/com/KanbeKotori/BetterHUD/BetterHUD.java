@@ -24,7 +24,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 @Mod(modid = BetterHUD.MODID, version = BetterHUD.VERSION)
 public class BetterHUD {
     public static final String MODID = "BetterHUD";
-    public static final String VERSION = "2.2";
+    public static final String VERSION = "2.4";
     
     @EventHandler
     public void init(FMLInitializationEvent event) {

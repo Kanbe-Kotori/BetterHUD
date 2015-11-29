@@ -2,13 +2,13 @@
 {
   "modid": "BetterHUD",
   "name": "Better HUD",
-  "description": "A better HUD for Minecraft.",
+  "description": "A better HUD viewing for Minecraft.",
   "version": "${version}",
-  "mcversion": "${mcversion}",
+  "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "Made by Nulla MC Development Group.",
+  "authorList": ["Kanbe Kotori"],
+  "credits": "Copyright (c) Nulla Development Group, 2014-2015",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
