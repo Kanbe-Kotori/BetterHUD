@@ -25,6 +25,10 @@ public class ReDraw_HUD_Air {
 	@SubscribeEvent
 	public void ReDraw_Air(RenderGameOverlayEvent.Pre event) {
 		if(event.type == ElementType.AIR) {
+			if (Helper.isUnDraw(Helper.getPlayer(), "Air")) {
+				return ;
+			}
+			
 	    	event.setCanceled(true);
 	    	Minecraft mc = Minecraft.getMinecraft();
 	    	int width = event.resolution.getScaledWidth();

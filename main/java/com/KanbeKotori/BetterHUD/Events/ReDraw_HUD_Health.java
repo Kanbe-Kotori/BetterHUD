@@ -26,6 +26,10 @@ public class ReDraw_HUD_Health {
 	@SubscribeEvent
 	public void ReDraw_Health(RenderGameOverlayEvent.Pre event) {
 		if(event.type == ElementType.HEALTH) {
+			if (Helper.isUnDraw(Helper.getPlayer(), "Health")) {
+				return ;
+			}
+			
 	    	event.setCanceled(true);
 	    	Minecraft mc = Minecraft.getMinecraft();
 	        int width = event.resolution.getScaledWidth();

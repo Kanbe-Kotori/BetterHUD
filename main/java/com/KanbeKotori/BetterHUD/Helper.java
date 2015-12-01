@@ -28,6 +28,13 @@ public class Helper {
 	public static boolean isUnDraw(EntityPlayer player, String HUD) {
 		return player.getEntityData().getBoolean(HUD + "isUnDraw");
 	}
+	
+	public static String getIsUnDrawText(EntityPlayer player, String HUD) {
+		if (isUnDraw(player, HUD)) {
+			return "Draws it";
+		}
+		return "Don't draws it";
+	}
 
 	@Deprecated //»¹Ã»Ð´¡£¡£
 	public static void setVerticle(EntityPlayer player, boolean flag, String HUD) {

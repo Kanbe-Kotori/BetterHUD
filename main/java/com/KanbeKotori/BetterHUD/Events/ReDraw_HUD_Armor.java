@@ -26,6 +26,10 @@ public class ReDraw_HUD_Armor {
 	@SubscribeEvent
 	public void ReDraw_Armor(RenderGameOverlayEvent.Pre event) {
 		if(event.type == ElementType.ARMOR) {
+			if (Helper.isUnDraw(Helper.getPlayer(), "Armor")) {
+				return ;
+			}
+			
 	    	event.setCanceled(true);
 	    	Minecraft mc = Minecraft.getMinecraft();
 	    	int width = event.resolution.getScaledWidth();

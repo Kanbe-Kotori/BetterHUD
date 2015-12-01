@@ -25,6 +25,10 @@ public class ReDraw_HUD_Food {
 	@SubscribeEvent
 	public void ReDraw_Food(RenderGameOverlayEvent.Pre event) {
 		if(event.type == ElementType.FOOD) {
+			if (Helper.isUnDraw(Helper.getPlayer(), "Food")) {
+				return ;
+			}
+			
 	    	event.setCanceled(true);
 	    	Minecraft mc = Minecraft.getMinecraft();
 	    	int width = event.resolution.getScaledWidth();
