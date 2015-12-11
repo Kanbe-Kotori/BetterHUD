@@ -12,6 +12,8 @@
  */
 package com.KanbeKotori.BetterHUD;
 
+import java.io.IOException;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -22,11 +24,21 @@ public class Helper {
 	}
 	
 	public static void setUnDraw(EntityPlayer player, boolean flag, String HUD) {
-		player.getEntityData().setBoolean(HUD + "isUnDraw", flag);
+		try {
+			DataHelper.setUnDraw(HUD, flag);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static boolean isUnDraw(EntityPlayer player, String HUD) {
-		return player.getEntityData().getBoolean(HUD + "isUnDraw");
+		boolean flag = false;
+		try {
+			flag = DataHelper.isUnDraw(HUD);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return flag;
 	}
 	
 	public static String getIsUnDrawText(EntityPlayer player, String HUD) {
@@ -47,16 +59,36 @@ public class Helper {
 	}
 
 	public static void setHUDPosition(EntityPlayer player, float posX, float posY, String HUD) {
-		player.getEntityData().setFloat(HUD + "posX", posX);
-		player.getEntityData().setFloat(HUD + "posY", posY);
+		try {
+			DataHelper.setposX(HUD, posX);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			DataHelper.setposY(HUD, posY);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public static float getHUDPositionX(EntityPlayer player, String HUD) {
-		return player.getEntityData().getFloat(HUD + "posX");
+	public static float getHUDPositionX(EntityPlayer player, String HUD){
+		float toreturn = 0;
+		try {
+			toreturn =  DataHelper.getposX(HUD);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return toreturn;
 	}
 	
 	public static float getHUDPositionY(EntityPlayer player, String HUD) {
-		return player.getEntityData().getFloat(HUD + "posY");
+		float toreturn = 0;
+		try {
+			toreturn =  DataHelper.getposY(HUD);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return toreturn;
 	}
 	
 	public static boolean isNumeric(String str) {

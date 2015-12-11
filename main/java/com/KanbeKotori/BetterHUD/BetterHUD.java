@@ -12,6 +12,8 @@
  */
 package com.KanbeKotori.BetterHUD;
 
+import java.io.IOException;
+
 import com.KanbeKotori.BetterHUD.Events.*;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -24,10 +26,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 @Mod(modid = BetterHUD.MODID, version = BetterHUD.VERSION)
 public class BetterHUD {
     public static final String MODID = "BetterHUD";
-    public static final String VERSION = "3.0";
+    public static final String VERSION = "final-¦Á";
     
     @EventHandler
-    public void init(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event) throws IOException {
+    	DataHelper.init();
+    	
     	FMLCommonHandler.instance().bus().register(new KeyListener());
 		ClientRegistry.registerKeyBinding(KeyListener.openGUI);
     	
