@@ -21,34 +21,34 @@ public class DataHelper {
 		}
 		
 		try {
-			RandomAccessFile rf = new RandomAccessFile(filePath1, "r");
-			rf.close();
+			RandomAccessFile rf1 = new RandomAccessFile(filePath1, "r");
+			rf1.close();
 		} catch(Exception e) {
-			RandomAccessFile rf = new RandomAccessFile(filePath1, "rw");
-			for (int i = 0; i < 8; i++)
-				rf.writeInt(0);
-			rf.close();
+			RandomAccessFile rf1 = new RandomAccessFile(filePath1, "rw");
+			for (int i = 0; i < 4; i++)
+				rf1.writeChar('F');
+			rf1.close();
 		}
 	}
 	
 	public static void setUnDraw(String HUD, boolean flag) throws IOException {
-		RandomAccessFile rf = new RandomAccessFile(filePath1, "rw");
+		RandomAccessFile rf1 = new RandomAccessFile(filePath1, "rw");
 		int pos = getPosInFile1(HUD);
-		rf.seek(pos * 4);
+		rf1.seek(pos * 2);
 		if (flag)
-			rf.writeInt(1);
+			rf1.writeChar('T');
 		else
-			rf.writeInt(0);
-		rf.close();
+			rf1.writeChar('F');
+		rf1.close();
 	}
 	
 	public static boolean isUnDraw(String HUD) throws IOException {
-		RandomAccessFile rf = new RandomAccessFile(filePath1, "r");
-		int pos = getPosInFile(HUD, 0);
-		rf.seek(pos * 4);
-		int toreturn = rf.readInt();
-		rf.close();
-		return toreturn == 1;
+		RandomAccessFile rf1 = new RandomAccessFile(filePath1, "r");
+		int pos = getPosInFile1(HUD);
+		rf1.seek(pos * 2);
+		char toreturn = rf1.readChar();
+		rf1.close();
+		return toreturn != 'F';
 	}
 	
 	
